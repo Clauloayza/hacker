@@ -9,6 +9,22 @@ form {
 .interactions {
     text-align: center;
 }
-a, body {
-    color: #222;
+.table-header{
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 24px;
+    font-size: 16px;
+    padding: 0 10px;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.table-row {
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 24px;
+    white-space: nowrap;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #e3e3e3;
 }
