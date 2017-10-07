@@ -1,0 +1,14 @@
+body {
+    background: #f4f4f4;
+    font: 400 14px CoreSans,Arial,sans-serif;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+.interactions {
+    text-align: center;
+}
+a, body {
+    color: #222;
+}
