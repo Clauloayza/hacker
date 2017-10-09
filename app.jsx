@@ -10,16 +10,11 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
-// https://hn.algolia.com/api/v1/search?query=redux&page=0&hitsPerPage=100
-
-
-
-
 class HackerNewsModel {
 
 	constructor () {
 		this.result = null;
-		this.searchTerm = 'react';
+		this.searchTerm = '';
 
 		this.notify = null;
 
@@ -41,7 +36,6 @@ class HackerNewsModel {
 			if (a < b) {
 				return -1;
 			}
-			// a must be equal to b
 			return 0;
 		};
 
@@ -66,7 +60,6 @@ class HackerNewsModel {
 		this.notify();
 	}
 
-	// https://hn.algolia.com/api/v1/search?query=redux&page=0&hitsPerPage=100
 	fetchSearchTopstories(searchTerm, page) {
 		const url=`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`;
 
@@ -105,6 +98,7 @@ const  SearchForm  = ({model}) => {
 				className="form-control"
 				defaultValue={model.searchTerm}
 				onChange={onChange}
+				placeholder="Search..."
 			/>
 			<button type="submit" className="btn btn-default">Search</button>
 		</form>
@@ -115,17 +109,27 @@ const HackerNewsRow = ( {id, title, author, comments, points, onRemove}  ) => {
 
 
 	return (
-		<tr>
-			<td>
-				<a href="#"> {title}</a>
-			</td>
-			<td> {author} </td>
-			<td> {comments} </td>
-			<td> {points} </td>
-			<td>
-				<button onClick = { () =>  onRemove(id) }>Dismiss</button>
-			</td>
-		</tr>
+		<div className="table-row">
+			<div className="a">
+				<span>
+					<a href="#">{title}}</a>
+				</span>
+			</div>
+			<div className="b">
+				<span>{author}</span>
+			</div>
+			<div className="c">
+				<span>{comments}</span>
+			</div>
+			<div className="c">
+				<span>{points}</span>
+			</div>
+			<div className="c">
+				<span>
+					<button onClick={()=> onRemove(id)} className="button-inline" type="button">Dismiss</button>    
+				</span>
+			</div>
+		</div>
 	);
 }
 
@@ -153,19 +157,24 @@ const HackerNewsTable = ( {model} ) => {
 	console.log ('contentList:', contentList);
 
 	return (
-		<div className="tablero">
-			<table className="table table-bordered">
-				<tbody>
-				<tr>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Comments</th>
-					<th>Points</th>
-					<th>Archive</th>
-				</tr>
-				{model.result && contentList}
-				</tbody>
-			</table>
+		<div className="table">
+		<div className="table-header">
+			<span className="a">
+				<button className="button-inline" type="button">Title</button>
+			</span>
+			<span className="b">
+				<button className="button-inline" type="button">Author</button>
+			</span>
+			<span className="c">
+				<button className="button-inline" type="button">Comments</button>
+			</span>
+			<span className="c">
+				<button className="button-inline" type="button">Points</button>
+			</span>
+			<span className="c archive">Archive</span>
+		</div>
+		{model.result && contentList}
+
 		</div>
 	) ;
 }
